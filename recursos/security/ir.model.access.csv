@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_recursos_inventario,recursos.inventario,model_recursos_inventario,,1,1,1,1
+access_recursos_categoria,recursos.categoria,model_recursos_categoria,,1,1,1,1
+
+access_recursos_proveedor,recursos.proveedor,model_recursos_proveedor,,1,1,1,1

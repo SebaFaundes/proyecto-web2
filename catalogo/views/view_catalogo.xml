@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+    <record model="ir.ui.view" id="catalogo.tattoos_tree">
+      <field name="name">catalogo.tattoos_tree</field>
+      <field name="model">catalogo.tattoos</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="category"/>
+          <field name="cost"/>
+          <field name="stock"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="catalogo.tattoos_form">
+      <field name="name">catalogo.tattoos_form</field>
+      <field name="model">catalogo.tattoos</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <field name="image" widget="image" class="oe_left oe_avatar"/>
+              
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>  
+                    <group>
+                    <field name="category"/>
+                    </group>
+                </group>
+
+                <group>
+                <group>
+                  <field name="cost"/>
+                </group>  
+                <group>
+                  <field name="stock"/>
+                </group>
+                </group>
+                <group>
+                    <field name="description"/>
+                </group>   
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="catalogo.tattoos_action_window">
+      <field name="name">Catalogo</field>
+      <field name="res_model">catalogo.tattoos</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+        <record model="ir.actions.server" id="catalogo.tattoos_action_server">
+      <field name="name">tattoos server</field>
+      <field name="model_id" ref="model_catalogo_tattoos"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    <menuitem name="Catalogo" id="catalogo.menu_root"/>
+    <menuitem name="Catalogo" id="catalogo.menu_tattoos" parent="catalogo.menu_root"
+              action="catalogo.tattoos_action_window"/>
+    </data>
+</odoo>

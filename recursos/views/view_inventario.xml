@@ -1,0 +1,186 @@
+<odoo>
+  <data>
+
+    <!--Listado de Recursos-->>
+    <record model="ir.ui.view" id="recursos.inventario_list">
+      <field name="name">Recursos</field>
+      <field name="model">recursos.inventario</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="date" widget="date"/>
+          <field name="description"/>
+          <field name="proveedor_id"/>
+          <field name="categoria_id"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <!--Formulario de Recursos-->
+
+    <record id="recursos.inventario_view" model="ir.ui.view">
+      <field name="name">Recursos</field>
+      <field name="model">recursos.inventario</field>
+      <field name="arch" type="xml">
+        <form string="Recursos">
+          <sheet>
+          <field name="image" widget="image" class="oe_left oe_avatar" />
+            <group>
+              <field name="name" />
+              <field name="date" />
+            </group>
+            <group>
+              <field name="description" />
+
+              <field name="proveedor_id" />
+              <field name="categoria_id" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="recursos.inventario_action_window">
+      <field name="name">Inventario</field>
+      <field name="res_model">recursos.inventario</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="recursos.inventario_action_server">
+      <field name="name">recursos server</field>
+      <field name="model_id" ref="model_recursos_inventario"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+<!--Menú sección de proveedores-->
+
+    <record model="ir.ui.view" id="recursos.proveedor_list">
+      <field name="name">Proveedor</field>
+      <field name="model">recursos.proveedor</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="description"/>
+          <field name="phone"/>
+          <field name="mail"/>
+          <field name="total_proveedor"/>
+        </tree>
+      </field>
+    </record>
+
+    <!-- Formulario de proveedores -->
+
+    <record id="recursos.proveedor_view" model="ir.ui.view">
+      <field name="name">Proveedor</field>
+      <field name="model">recursos.proveedor</field>
+      <field name="arch" type="xml">
+        <form string="Proveedor">
+          <sheet>
+            <group>
+              <field name="name" />
+            </group>
+            <group>
+              <field name="description" />
+              <field name="address" />
+              <field name="phone" />
+              <field name="mail" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="recursos.proveedor_action_window">
+      <field name="name">Datos de Proveedores</field>
+      <field name="res_model">recursos.proveedor</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+    <record model="ir.actions.server" id="recursos.proveedor_action_server">
+      <field name="name">proveedor server</field>
+      <field name="model_id" ref="model_recursos_proveedor"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+ <!--Sección de categorías-->
+
+    <record model="ir.ui.view" id="recursos.categoria_list">
+      <field name="name">Categorías</field>
+      <field name="model">recursos.categoria</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="total_categoria"/>
+
+        </tree>
+      </field>
+    </record>
+
+    <!--Formulario Categoría-->
+
+    <record id="recursos.categoria_view" model="ir.ui.view">
+      <field name="name">Categoría</field>
+      <field name="model">recursos.categoria</field>
+      <field name="arch" type="xml">
+        <form string="Categoría">
+          <sheet>
+            <group>
+              <field name="name" />
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    
+    <record model="ir.actions.act_window" id="recursos.categoria_action_window">
+      <field name="name">Datos de Categorías</field>
+      <field name="res_model">recursos.categoria</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <record model="ir.actions.server" id="recursos.categoria_action_server">
+      <field name="name">categoria server</field>
+      <field name="model_id" ref="model_recursos_categoria"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+
+    <menuitem name="Recursos" id="recursos.menu_root"/>
+
+ <!-- Menus superiores -->
+
+    <!-- Menú de inventario -->
+    <menuitem name="Inventario" id="recursos.menu_inventario" parent="recursos.menu_root" />
+
+    <!-- Menú de Proveedores -->
+    <menuitem name="Proveedores" id="recursos.menu_proveedor" parent="recursos.menu_root" action="recursos.proveedor_action_window"/>
+
+    <!-- Menus desplegables Inventario -->
+    <menuitem name="General" id="recursos.menu_inventario_general" parent="recursos.menu_inventario" action="recursos.inventario_action_window"/>
+
+    <menuitem name="Categorías" id="recursos.menu_categoria" parent="recursos.menu_inventario" action="recursos.categoria_action_window"/>
+  </data>
+</odoo>

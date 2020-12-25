@@ -1,0 +1,88 @@
+<odoo>
+    <data>
+      <record model="ir.ui.view" id="agendas.horario_tree">
+      <field name="name">agendas.horario_tree</field>
+      <field name="model">agendas.horario</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="category"/>
+          <field name="cost"/>
+          <field name="hour"/>
+          <field name="assistance"/>
+          <field name="status_pago"/>
+          <field name="status_pago"/>
+        </tree>
+      </field>
+    </record>
+
+    <record model="ir.ui.view" id="agendas.horario_form">
+      <field name="name">agendas.horario_form</field>
+      <field name="model">agendas.horario</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <field name="image" widget="image" class="oe_left oe_avatar"/>
+              
+                <group>
+                    <group>
+                        <field name="name"/>
+                    </group>  
+                    <group>
+                    <field name="category"/>
+                    </group>
+                </group>
+
+                <group>
+                <group>
+                  <field name="cost"/>
+                </group>  
+                <group>
+                  <field name="hour"/>
+                </group>
+                </group>
+                
+                <group>
+                <group>
+                  <field name="assistance"/>
+                </group>  
+                <group>
+                  <field name="status_pago"/>
+                </group>
+                </group>
+
+                <group>
+                  <field name="status_servicio"/>
+                </group>
+        
+                <group>                   
+                    <field name="description"/>
+                </group>  
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="agendas.horario_action_window">
+      <field name="name">agendas</field>
+      <field name="res_model">agendas.horario</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+
+        <record model="ir.actions.server" id="agendas.horario_action_server">
+      <field name="name">horario server</field>
+      <field name="model_id" ref="model_agendas_horario"/>
+      <field name="state">code</field>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    <menuitem name="Agenda" id="agendas.menu_root"/>
+    <menuitem name="Agenda" id="agendas.menu_horario" parent="agendas.menu_root"
+              action="agendas.horario_action_window"/>
+    </data>
+</odoo>
